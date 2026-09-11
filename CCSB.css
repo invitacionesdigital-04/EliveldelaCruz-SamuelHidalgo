@@ -138,30 +138,30 @@ html { background-color: #F3EEE1; }
 }
 
 .btn-gold {
-    background-color: #6B5644;
+    background-color: #6E7C4E;
     color: #fff;
-    border: 2px solid #8C7259;
+    border: 2px solid #9CAA80;
     border-radius: 9999px;
     padding: 0.65rem 1.1rem;
     cursor: pointer;
     transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
     font-weight: 600;
-    box-shadow: 0 6px 20px rgba(168, 107, 0, 0.35);
+    box-shadow: 0 6px 20px rgba(110, 124, 78, 0.35);
 }
 
 .btn-gold:hover { transform: translateY(-1px); }
 
 .btn-gold-outline {
     background: transparent;
-    color: #8C7259;
-    border: 1px solid #8C7259;
+    color: #4B5636;
+    border: 1px solid #6E7C4E;
     border-radius: 9999px;
     padding: 0.65rem 1.1rem;
     cursor: pointer;
     transition: background-color .2s ease, color .2s ease;
 }
 
-.btn-gold-outline:hover { background-color: rgba(215,164,74,0.12); }
+.btn-gold-outline:hover { background-color: rgba(110, 124, 78, 0.12); }
 
 .modal-title {
     font-size: 1.6rem;
