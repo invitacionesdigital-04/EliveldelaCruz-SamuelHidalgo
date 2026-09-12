@@ -1,220 +1,17 @@
 // Variables globales
-let isPlaying = false;
-let player = null;
-let playerReady = false;
 let currentSlide = 0;
 let totalSlides = 0;
-let enableMusic = false;
-
-// Funciones globales para los botones del modal
-function enterWithMusicClick() {
-    // console.log('Función enterWithMusicClick() ejecutada');
-    enableMusic = true;
-    const modal = document.getElementById('welcomeModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-
-    // El player se precarga desde DOMContentLoaded (ver loadYouTubeAPI más abajo),
-    // así que si ya está listo llamamos playVideo() de inmediato, dentro del mismo
-    // tick del click. Eso es justo lo que iOS Safari exige para permitir el audio;
-    // si el player se crea o se reproduce de forma asíncrona (fuera del gesto del
-    // usuario), iOS lo bloquea en silencio y por eso antes no sonaba en iPhone.
-    if (playerReady && player) {
-        document.getElementById('musicPlayer').style.display = 'block';
-        player.playVideo();
-        isPlaying = true;
-        updateMusicIcon();
-    }
-    // Si el player todavía no está listo (conexión lenta), onPlayerReady se
-    // encarga de reproducir apenas termine de inicializar.
-}
-
-function enterWithoutMusicClick() {
-    // console.log('Función enterWithoutMusicClick() ejecutada');
-    enableMusic = false;
-    const modal = document.getElementById('welcomeModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// Función para configurar los botones directamente
-function setupModalButtons() {
-    const enterWithMusic = document.getElementById('enterWithMusic');
-    const enterWithoutMusic = document.getElementById('enterWithoutMusic');
-    const modal = document.getElementById('welcomeModal');
-
-    // console.log('Configurando botones del modal...', { enterWithMusic, enterWithoutMusic, modal });
-
-    if (enterWithMusic) {
-        enterWithMusic.onclick = function() {
-            // console.log('Botón CON música clickeado');
-            enableMusic = true;
-            if (modal) {
-                modal.style.display = 'none';
-            }
-            // Mismo arreglo que en enterWithMusicClick: reproducir de forma
-            // síncrona dentro del click si el player ya está precargado.
-            if (playerReady && player) {
-                const musicPlayer = document.getElementById('musicPlayer');
-                if (musicPlayer) musicPlayer.style.display = 'block';
-                player.playVideo();
-                isPlaying = true;
-                updateMusicIcon();
-            }
-        };
-    }
-
-    if (enterWithoutMusic) {
-        enterWithoutMusic.onclick = function() {
-            // console.log('Botón SIN música clickeado');
-            enableMusic = false;
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        };
-    }
-}
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    // console.log('DOM cargado, inicializando...');
     initializeCountdown();
     initializeCarousel();
-    setupModalButtons();
-
-    // Mostrar el modal de bienvenida para elegir con/sin música
-    const modal = document.getElementById('welcomeModal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
-
-    // Se precarga el player de YouTube desde el inicio (no en el click) para
-    // que playVideo() pueda ejecutarse de forma síncrona dentro del gesto del
-    // usuario en enterWithMusicClick(). Esto es lo que exige iOS Safari.
-    loadYouTubeAPI();
+    initializeGuestGreeting();
 });
-
-// También configurar cuando la página esté completamente cargada
-window.addEventListener('load', function() {
-    // console.log('Ventana completamente cargada');
-    setupModalButtons();
-});
-
-
-
-// Cargar la API de YouTube
-function loadYouTubeAPI() {
-    const script = document.createElement('script');
-    script.src = 'https://www.youtube.com/iframe_api';
-    document.body.appendChild(script);
-    window.onYouTubeIframeAPIReady = initializeYouTubePlayer;
-}
-
-// Función llamada por la API de YouTube
-function initializeYouTubePlayer() {
-    if (player) return; // ya inicializado, evita crear el player dos veces
-
-    player = new YT.Player('youtube-player', {
-        height: '1',
-        width: '1',
-        videoId: 'RAvMoGbSh24',
-        playerVars: {
-            autoplay: 0,
-            controls: 0,
-            disablekb: 1,
-            fs: 0,
-            loop: 1,
-            modestbranding: 1,
-            playsinline: 1,
-            rel: 0,
-            showinfo: 0,
-            iv_load_policy: 3,
-            playlist: 'RAvMoGbSh24'
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange,
-            'onError': onPlayerError
-        }
-    });
-}
-
-function onPlayerReady(event) {
-    playerReady = true;
-    const musicPlayer = document.getElementById('musicPlayer');
-    const musicToggle = document.getElementById('musicToggle');
-
-    if (musicToggle) {
-        musicToggle.addEventListener('click', toggleMusic);
-    }
-
-    // Caso borde: el usuario ya hizo click en "con música" antes de que el
-    // player terminara de inicializar (ej. conexión lenta). Lo reproducimos
-    // apenas esté listo.
-    if (enableMusic && !isPlaying) {
-        if (musicPlayer) musicPlayer.style.display = 'block';
-        event.target.playVideo();
-        isPlaying = true;
-        updateMusicIcon();
-    }
-}
-
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-        isPlaying = true;
-    } else if (event.data === YT.PlayerState.PAUSED) {
-        isPlaying = false;
-    }
-    updateMusicIcon();
-}
-
-function onPlayerError(event) {
-    console.log('Error al cargar el video de YouTube');
-    const musicPlayer = document.getElementById('musicPlayer');
-    musicPlayer.style.display = 'block';
-    isPlaying = false;
-    updateMusicIcon();
-}
-
-function toggleMusic() {
-    if (player) {
-        if (isPlaying) {
-            player.pauseVideo();
-            isPlaying = false;
-        } else {
-            player.playVideo();
-            isPlaying = true;
-        }
-        updateMusicIcon();
-    }
-}
-
-function updateMusicIcon() {
-    const volumeIcon = document.getElementById('volumeIcon');
-    
-    if (volumeIcon) {
-        if (isPlaying) {
-            volumeIcon.innerHTML = `
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#222" stroke="#fff" stroke-width="1"></polygon>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.08" stroke="#222" stroke-width="2"></path>
-                <circle cx="6.5" cy="12" r="1" fill="#ffe27a"/>
-            `;
-        } else {
-            volumeIcon.innerHTML = `
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#222" stroke="#fff" stroke-width="1"></polygon>
-                <line x1="19" y1="9" x2="17" y2="11" stroke="#ff6b6b" stroke-width="2"></line>
-                <line x1="17" y1="9" x2="19" y2="11" stroke="#ff6b6b" stroke-width="2"></line>
-                <circle cx="6.5" cy="12" r="1" fill="#ff6b6b"/>
-            `;
-        }
-    }
-}
 
 // Countdown
 function initializeCountdown() {
-    const targetDate = new Date('2026-12-20T15:30:00').getTime();
+    const targetDate = new Date('2027-03-19T16:00:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
@@ -378,17 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Funciones de los botones
 function openLocation(location) {
-    // Enlaces de ejemplo (dirección ficticia) - ceremonia y celebración
-    const mapsUrls = {
-        ceremony: "https://maps.google.com/maps?q=Calle+Duarte+45,+Santo+Domingo&z=17&hl=es",
-        reception: "https://maps.google.com/maps?q=Av+Los+Jardines+120,+Santo+Domingo&z=17&hl=es"
-    };
-    const mapsUrl = mapsUrls[location] || mapsUrls.ceremony;
+    // Casa Los Pinos, Loma de Los Ángeles, La Vega (mismo lugar para ambos eventos)
+    const mapsUrl = "https://www.google.com/maps/place/19%C2%B016'06.8%22N+70%C2%B033'34.8%22W/@19.2685556,-70.5596667,17z/data=!3m1!4b1!4m4!3m3!8m2!3d19.2685556!4d-70.5596667?hl=es&entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D";
     window.open(mapsUrl, '_blank');
 }
 
 function sharePhotos() {
-    const photosUrl = "https://photos.app.goo.gl/EJEMPLO00000";
+    const photosUrl = "https://photos.app.goo.gl/JbJYbbENQaUfsKLd6";
     window.open(photosUrl, '_blank');
 }
 
@@ -408,13 +201,36 @@ function closeDressCodeModal() {
     }
 }
 
+function showTips() {
+    const modal = document.getElementById('tipsModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeTipsModal() {
+    const modal = document.getElementById('tipsModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 function showGifts() {
-    const giftUrl = "https://ejemplo.com/datos-de-regalo";
-    window.open(giftUrl, '_blank');
+    const modal = document.getElementById('giftModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeGiftModal(event) {
+    const modal = document.getElementById('giftModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function confirmAttendance() {
-    const googleFormUrl = "https://forms.gle/EJEMPLO00000";
+    const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSegHnYfHk-X4eCj1FfVN3MJ5IzeRsDoL3shdrsrKsatAeF2cg/viewform?usp=header";
     window.open(googleFormUrl, '_blank');
 }
 
@@ -439,6 +255,57 @@ function showToast(title, message) {
 // del contenido, ver .hero-section y .content en CCSB.css), igual que en
 // boda100L. Ya no hace falta mover nada por JS en el scroll.
 
+// Saludo personalizado por invitado/familia, leído desde la URL.
+// Formatos soportados:
+//   ?invitados=Juan Arias,Yerianny Arias,Valery Arias
+//   ?familia=Arias
+function initializeGuestGreeting() {
+    const params = new URLSearchParams(window.location.search);
+    const invitadosParam = params.get('invitados');
+    const familiaParam = params.get('familia');
+
+    const section = document.getElementById('guestSection');
+    const badge = document.getElementById('guestBadge');
+    const subtitle = document.getElementById('guestSubtitle');
+    const greeting = document.getElementById('guestGreeting');
+    if (!section || !badge || !subtitle || !greeting) return;
+
+    let names = [];
+
+    if (invitadosParam) {
+        names = invitadosParam.split(',').map(n => decodeURIComponent(n.trim())).filter(Boolean);
+    } else if (familiaParam) {
+        names = [`Familia ${familiaParam.trim()}`];
+    }
+
+    if (names.length === 0) return;
+
+    // Badge con el total de invitados
+    badge.textContent = names.length;
+
+    // Subtítulo de acompañantes: solo tiene sentido cuando hay más de un
+    // nombre individual (no aplica al formato "Familia X")
+    const companions = invitadosParam ? names.length - 1 : 0;
+    if (companions > 0) {
+        subtitle.textContent = `(${companions} acompañante${companions > 1 ? 's' : ''})`;
+        subtitle.style.display = 'block';
+    } else {
+        subtitle.style.display = 'none';
+    }
+
+    // Limpiar contenido previo
+    greeting.innerHTML = '';
+
+    names.forEach((name, index) => {
+        const nameSpan = document.createElement('span');
+        const colorIndex = (index % 4) + 1;
+        nameSpan.className = `guest-name color-${colorIndex}`;
+        nameSpan.textContent = name;
+        greeting.appendChild(nameSpan);
+    });
+
+    section.style.display = 'block';
+}
 
 // Forzar limpieza de caches en clientes antiguos
 (function() {

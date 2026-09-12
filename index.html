@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana & Carlos - Invitación de Boda</title>
+    <title>Elivel & Samuel - Invitación de Boda</title>
     <link rel="preload" as="image" href="foto0.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CCSB.css">
         <style>
         /* Carrusel: 3 imágenes simultáneamente con foto central destacada */
@@ -139,30 +142,6 @@
 </head>
 <body>
     <div class="main-center">
-        <!-- Modal de Bienvenida -->
-        <div id="welcomeModal" class="modal-overlay">
-            <div class="welcome-hero">
-                <h1 class="welcome-title welcome-title-sm">Bienvenidos a la<br/>invitación de Ana García y<br/>Carlos Martínez</h1>
-                <p class="welcome-note">La música de fondo es parte de la experiencia</p>
-                <div class="welcome-actions">
-                    <button id="enterWithMusic" class="btn-gold" onclick="enterWithMusicClick()">Ingresar con música</button>
-                    <button id="enterWithoutMusic" class="btn-gold-outline" onclick="enterWithoutMusicClick()">Ingresar sin música</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Reproductor de música -->
-        <div id="musicPlayer" class="music-player" style="display: none;">
-            <button id="musicToggle" class="music-button modern-icon" title="Reproducir/Pausar música">
-                <svg id="volumeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#53402D" stroke="#fff" stroke-width="1"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.08" stroke="#53402D" stroke-width="2"></path>
-                    <circle cx="6.5" cy="12" r="1" fill="#A3AD82"/>
-                </svg>
-            </button>
-            <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
-        </div>
-
         <!-- Hero Section -->
         <div class="hero-section">
             <img class="hero-bg" src="foto0.jpg" alt="Portada boda Ana y Carlos">
@@ -173,7 +152,7 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <div class="date date-hidden" aria-hidden="true">15.11.2026</div>
-                    <h1 class="names">Ana García <span class="ampersand">y</span> Carlos Martínez</h1>
+                    <h1 class="names">Elivel de la Cruz <span class="ampersand">&amp;</span> Samuel Hidalgo</h1>
                     <blockquote class="quote">
                         "Todos somos mortales,<br />
                         hasta el primer beso y la segunda copa de vino"
@@ -194,6 +173,12 @@
         </div>
         <!-- Countdown -->
         <section class="countdown-section">
+            <div id="guestSection" class="guest-section" style="display:none;">
+                <div id="guestBadge" class="guest-badge">0</div>
+                <h2 class="guest-title">¡Bienvenidos!</h2>
+                <p id="guestSubtitle" class="guest-subtitle" style="display:none;"></p>
+                <div id="guestGreeting" class="guest-greeting"></div>
+            </div>
             <h2 class="section-title">Falta</h2>
             <div class="countdown-container">
                 <div class="countdown-item">
@@ -216,31 +201,43 @@
         </section>
 
         <!-- Ceremony & Celebration -->
+        <div class="section-divider">
+            <img src="separador-flores.png" alt="">
+        </div>
         <section class="events-section">
             <div class="events-container">
                 <!-- Ceremony -->
                 <div class="event-card">
-                    <div class="event-icon modern-icon">
+                    <div class="event-icon modern-icon ceremonia-icon">
                         <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="24" cy="38" r="13" fill="none" stroke="#53402D" stroke-width="5"/>
-                            <circle cx="40" cy="38" r="13" fill="none" stroke="#53402D" stroke-width="5"/>
+                            <g class="ceremonia-rings">
+                                <circle cx="24" cy="40" r="16" fill="none" stroke="#53402D" stroke-width="3.5"/>
+                                <circle cx="40" cy="40" r="16" fill="none" stroke="#53402D" stroke-width="3.5"/>
+                                <path d="M16 12 L20 6 L28 6 L32 12 L24 22 Z" fill="none" stroke="#53402D" stroke-width="2.2" stroke-linejoin="round"/>
+                                <path d="M20 6 L24 12 L28 6 M16 12 L32 12" fill="none" stroke="#53402D" stroke-width="1.6" stroke-linejoin="round"/>
+                                <path d="M19 21 L16.5 27" stroke="#53402D" stroke-width="2.2" stroke-linecap="round"/>
+                                <path d="M29 21 L31.5 27" stroke="#53402D" stroke-width="2.2" stroke-linecap="round"/>
+                            </g>
+                            <g class="ceremonia-sparkle">
+                                <path d="M35 4 L36.4 8 L40.4 9.4 L36.4 10.8 L35 14.8 L33.6 10.8 L29.6 9.4 L33.6 8 Z" fill="#53402D"/>
+                            </g>
                         </svg>
                     </div>
                     <h3 class="event-title">Ceremonia</h3>
                     <div class="event-details">
                         <h4>Día</h4>
-                        <p>Domingo 15 de Noviembre - 16:00hs</p>
+                        <p>Viernes 19 de Marzo, 2027 - 4:00pm</p>
                         <p class="event-punctuality">Por favor ser puntual</p>
                     </div>
                     <div class="event-details">
                         <h4>Lugar</h4>
-                        <p>Parroquia Santa Rosa de Lima</p>
-                        <p class="event-address">Calle Duarte #45, Santo Domingo</p>
+                        <p>Casa Los Pinos</p>
+                        <p class="event-address">Loma de Los Ángeles, La Vega</p>
                     </div>
                     <button class="btn-wedding" onclick="openLocation('ceremony')">¿Cómo llegar?</button>
                 </div>
 
-                <!-- Celebration / Reception -->
+                <!-- Reception -->
                 <div class="event-card">
                     <div class="event-icon modern-icon">
                         <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -256,16 +253,15 @@
                             </g>
                         </svg>
                     </div>
-                    <h3 class="event-title">Celebración</h3>
+                    <h3 class="event-title">Recepción</h3>
                     <div class="event-details">
                         <h4>Día</h4>
-                        <p>Domingo 15 de Noviembre - 18:00hs</p>
-                        <p class="event-punctuality">La recepción sigue a la ceremonia</p>
+                        <p>Viernes 19 de Marzo, 2027 - 6:00pm</p>
                     </div>
                     <div class="event-details">
                         <h4>Lugar</h4>
-                        <p>Salón Los Almendros</p>
-                        <p class="event-address">Av. Los Jardines #120, Santo Domingo</p>
+                        <p>Casa Los Pinos</p>
+                        <p class="event-address">Loma de Los Ángeles, La Vega</p>
                     </div>
                     <button class="btn-wedding" onclick="openLocation('reception')">¿Cómo llegar?</button>
                 </div>
@@ -326,6 +322,9 @@
         </section>
 
         <!-- Party Information -->
+        <div class="section-divider">
+            <img src="separador-flores.png" alt="">
+        </div>
         <section class="party-section">
             <div class="party-container">
                 <h2 class="section-title">Fiesta</h2>
@@ -358,6 +357,19 @@
                         <p>Ayúdanos a capturar cada momento, sube las fotos que tomes durante la fiesta.</p>
                         <button class="btn-wedding" onclick="sharePhotos()">Subir Fotos</button>
                     </div>
+
+                    <div class="party-card">
+                        <div class="party-icon modern-icon">
+                            <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="26" fill="none" stroke="#53402D" stroke-width="4"/>
+                                <circle cx="32" cy="23" r="6" fill="#53402D"/>
+                                <path d="M20 45 C20 35 44 35 44 45" fill="#53402D"/>
+                                <line x1="11" y1="53" x2="53" y2="11" stroke="#53402D" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Tips y Notas</h3>
+                        <button class="btn-wedding" onclick="showTips()">Ver más</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -369,7 +381,7 @@
         <section class="gifts-section">
             <div class="gifts-container">
                 <h2 class="section-title">Regalos</h2>
-                <p class="section-subtitle">Si deseas regalarnos algo más que tu hermosa presencia.</p>
+                <p class="section-subtitle">Poder celebrar contigo es nuestro mejor regalo. Pero si deseas hacernos un obsequio, aquí tienes nuestros datos bancarios.</p>
                 
                 <div class="gift-icon modern-icon">
                     <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -386,10 +398,13 @@
         </section>
 
         <!-- RSVP -->
+        <div class="section-divider">
+            <img src="separador-flores.png" alt="">
+        </div>
         <section class="rsvp-section">
             <div class="rsvp-container">
                 <h2 class="section-title">Confirma tu Asistencia</h2>
-                <p class="section-subtitle">Por favor confirma tu asistencia antes del 1 de Noviembre de 2026</p>
+                <p class="section-subtitle">Por favor confirma tu asistencia antes del 1 de Marzo de 2027</p>
                 
                 <div class="whatsapp-icon modern-icon">
                     <svg width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -414,8 +429,8 @@
         <footer class="footer">
             <div class="footer-content">
                 <p>Con amor,</p>
-                <h3>Ana García y Carlos Martínez</h3>
-                <p class="footer-date">15 de Noviembre, 2026</p>
+                <h3>Elivel de la Cruz &amp; Samuel Hidalgo</h3>
+                <p class="footer-date">19 de Marzo, 2027</p>
             </div>
         </footer>
         </div>
@@ -425,11 +440,38 @@
             <div class="dresscode-modal" onclick="event.stopPropagation()">
                 <button class="modal-close" onclick="closeDressCodeModal()" aria-label="Cerrar">&times;</button>
                 <h2 class="modal-title-dark">Código de Vestimenta</h2>
-                <p class="modal-text-dark">No blanco · No amarillo · No rojo</p>
+                <p class="modal-text-dark">Formal.</p>
+                <p class="modal-text-dark">Hombres de traje y mujeres con vestidos largos elegantes.</p>
+                <p class="modal-text-dark">Agradecemos evitar los colores blanco, beige y/o champán, reservados para los novios.</p>
                 <div class="dresscode-colors">
                     <span class="color-dot" style="background:#ffffff;" title="No blanco"></span>
-                    <span class="color-dot" style="background:#f4d03f;" title="No amarillo"></span>
-                    <span class="color-dot" style="background:#e74c3c;" title="No rojo"></span>
+                    <span class="color-dot" style="background:#e8dcc4;" title="No beige"></span>
+                    <span class="color-dot" style="background:#f0e2b6;" title="No champán"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Tips y Notas -->
+        <div id="tipsModal" class="modal-overlay" onclick="closeTipsModal(event)">
+            <div class="dresscode-modal" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeTipsModal()" aria-label="Cerrar">&times;</button>
+                <h2 class="modal-title-dark">Tips y Notas</h2>
+                <p class="modal-text-dark">Solo para adultos.</p>
+                <p class="modal-text-dark">Hemos decidido celebrar nuestra boda solo entre adultos. Agradecemos de antemano su comprensión y esperamos que puedan celebrar junto a nosotros esta noche tan especial.</p>
+            </div>
+        </div>
+
+        <!-- Modal Regalo -->
+        <div id="giftModal" class="modal-overlay" onclick="closeGiftModal(event)">
+            <div class="dresscode-modal" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeGiftModal()" aria-label="Cerrar">&times;</button>
+                <h2 class="modal-title-dark">Regalos</h2>
+                <p class="modal-text-dark">Poder celebrar contigo es nuestro mejor regalo.</p>
+                <p class="modal-text-dark">Pero si deseas hacernos un obsequio, puedes considerar una contribución a través de las siguientes cuentas:</p>
+                <div class="gift-account">
+                    <p><strong>[Nombre del banco]</strong></p>
+                    <p>Cuenta de ahorros: [Número de cuenta]</p>
+                    <p>A nombre de: Elivel de la Cruz</p>
                 </div>
             </div>
         </div>
