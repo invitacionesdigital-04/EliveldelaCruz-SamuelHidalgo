@@ -201,32 +201,9 @@ function closeDressCodeModal() {
     }
 }
 
-function showTips() {
-    const modal = document.getElementById('tipsModal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
-}
-
-function closeTipsModal() {
-    const modal = document.getElementById('tipsModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
 function showGifts() {
-    const modal = document.getElementById('giftModal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
-}
-
-function closeGiftModal(event) {
-    const modal = document.getElementById('giftModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    const giftUrl = "https://invitacionesdigital-04.github.io/NumerodecuentaElivel/";
+    window.open(giftUrl, '_blank');
 }
 
 function confirmAttendance() {

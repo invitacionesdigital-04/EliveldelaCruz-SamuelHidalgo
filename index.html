@@ -205,8 +205,8 @@
             <img src="separador-flores.png" alt="">
         </div>
         <section class="events-section">
-            <div class="events-container">
-                <!-- Ceremony -->
+            <div class="events-container events-container-single">
+                <!-- Ceremony & Reception -->
                 <div class="event-card">
                     <div class="event-icon modern-icon ceremonia-icon">
                         <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -223,10 +223,10 @@
                             </g>
                         </svg>
                     </div>
-                    <h3 class="event-title">Ceremonia</h3>
+                    <h3 class="event-title">Ceremonia y Recepción</h3>
                     <div class="event-details">
                         <h4>Día</h4>
-                        <p>Viernes 19 de Marzo, 2027 - 4:00pm</p>
+                        <p>Viernes 19 de Marzo, 2027 - 5:00pm</p>
                         <p class="event-punctuality">Por favor ser puntual</p>
                     </div>
                     <div class="event-details">
@@ -235,35 +235,6 @@
                         <p class="event-address">Loma de Los Ángeles, La Vega</p>
                     </div>
                     <button class="btn-wedding" onclick="openLocation('ceremony')">¿Cómo llegar?</button>
-                </div>
-
-                <!-- Reception -->
-                <div class="event-card">
-                    <div class="event-icon modern-icon">
-                        <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                            <g transform="rotate(-18 20 32)">
-                                <path d="M12 6 H28 L24 26 A6 6 0 0 1 16 26 Z" fill="#53402D"/>
-                                <rect x="18.5" y="26" width="3" height="14" fill="#53402D"/>
-                                <rect x="12" y="40" width="16" height="3" rx="1.5" fill="#53402D"/>
-                            </g>
-                            <g transform="rotate(18 44 32)">
-                                <path d="M36 6 H52 L48 26 A6 6 0 0 1 40 26 Z" fill="#53402D"/>
-                                <rect x="42.5" y="26" width="3" height="14" fill="#53402D"/>
-                                <rect x="36" y="40" width="16" height="3" rx="1.5" fill="#53402D"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <h3 class="event-title">Recepción</h3>
-                    <div class="event-details">
-                        <h4>Día</h4>
-                        <p>Viernes 19 de Marzo, 2027 - 6:00pm</p>
-                    </div>
-                    <div class="event-details">
-                        <h4>Lugar</h4>
-                        <p>Casa Los Pinos</p>
-                        <p class="event-address">Loma de Los Ángeles, La Vega</p>
-                    </div>
-                    <button class="btn-wedding" onclick="openLocation('reception')">¿Cómo llegar?</button>
                 </div>
             </div>
         </section>
@@ -327,8 +298,8 @@
         </div>
         <section class="party-section">
             <div class="party-container">
-                <h2 class="section-title">Fiesta</h2>
-                <p class="section-subtitle">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta.</p>
+                <h2 class="section-title">Hagamos de esta noche un recuerdo único</h2>
+                <p class="section-subtitle">Aquí algunos detalles a tener en cuenta.</p>
 
                 <div class="party-grid">
                     <div class="party-card">
@@ -357,20 +328,27 @@
                         <p>Ayúdanos a capturar cada momento, sube las fotos que tomes durante la fiesta.</p>
                         <button class="btn-wedding" onclick="sharePhotos()">Subir Fotos</button>
                     </div>
-
-                    <div class="party-card">
-                        <div class="party-icon modern-icon">
-                            <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="32" cy="32" r="26" fill="none" stroke="#53402D" stroke-width="4"/>
-                                <circle cx="32" cy="23" r="6" fill="#53402D"/>
-                                <path d="M20 45 C20 35 44 35 44 45" fill="#53402D"/>
-                                <line x1="11" y1="53" x2="53" y2="11" stroke="#53402D" stroke-width="4" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Tips y Notas</h3>
-                        <button class="btn-wedding" onclick="showTips()">Ver más</button>
-                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Tips y Notas -->
+        <div class="section-divider">
+            <img src="separador-flores.png" alt="">
+        </div>
+        <section class="tips-section">
+            <div class="tips-container">
+                <h2 class="section-title">Tips y Notas</h2>
+                <div class="tips-icon modern-icon">
+                    <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="26" fill="none" stroke="#53402D" stroke-width="4"/>
+                        <circle cx="32" cy="23" r="6" fill="#53402D"/>
+                        <path d="M20 45 C20 35 44 35 44 45" fill="#53402D"/>
+                        <line x1="11" y1="53" x2="53" y2="11" stroke="#53402D" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="tips-note-title">Solo para adultos</h3>
+                <p class="tips-note-text">Hemos decidido celebrar nuestra boda solo entre adultos. Agradecemos de antemano su comprensión y esperamos que puedan celebrar junto a nosotros esta noche tan especial.</p>
             </div>
         </section>
 
@@ -447,31 +425,6 @@
                     <span class="color-dot" style="background:#ffffff;" title="No blanco"></span>
                     <span class="color-dot" style="background:#e8dcc4;" title="No beige"></span>
                     <span class="color-dot" style="background:#f0e2b6;" title="No champán"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Tips y Notas -->
-        <div id="tipsModal" class="modal-overlay" onclick="closeTipsModal(event)">
-            <div class="dresscode-modal" onclick="event.stopPropagation()">
-                <button class="modal-close" onclick="closeTipsModal()" aria-label="Cerrar">&times;</button>
-                <h2 class="modal-title-dark">Tips y Notas</h2>
-                <p class="modal-text-dark">Solo para adultos.</p>
-                <p class="modal-text-dark">Hemos decidido celebrar nuestra boda solo entre adultos. Agradecemos de antemano su comprensión y esperamos que puedan celebrar junto a nosotros esta noche tan especial.</p>
-            </div>
-        </div>
-
-        <!-- Modal Regalo -->
-        <div id="giftModal" class="modal-overlay" onclick="closeGiftModal(event)">
-            <div class="dresscode-modal" onclick="event.stopPropagation()">
-                <button class="modal-close" onclick="closeGiftModal()" aria-label="Cerrar">&times;</button>
-                <h2 class="modal-title-dark">Regalos</h2>
-                <p class="modal-text-dark">Poder celebrar contigo es nuestro mejor regalo.</p>
-                <p class="modal-text-dark">Pero si deseas hacernos un obsequio, puedes considerar una contribución a través de las siguientes cuentas:</p>
-                <div class="gift-account">
-                    <p><strong>[Nombre del banco]</strong></p>
-                    <p>Cuenta de ahorros: [Número de cuenta]</p>
-                    <p>A nombre de: Elivel de la Cruz</p>
                 </div>
             </div>
         </div>
