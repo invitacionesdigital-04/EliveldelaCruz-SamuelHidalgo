@@ -226,7 +226,7 @@ html { background-color: #F3EEE1; }
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: none;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.5) 100%);
 }
 
 /* Ramo decorativo: arriba de todo, de lado a lado y bien arriba,
@@ -294,7 +294,8 @@ html { background-color: #F3EEE1; }
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: hsl(var(--foreground));
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
     padding: 1rem;
     box-sizing: border-box;
 }
@@ -811,6 +812,16 @@ html { background-color: #F3EEE1; }
 }
 .quote::before { content: "“"; top: -1.5rem; font-size: 2rem; }
 .quote::after { content: "”"; bottom: -2.5rem; font-size: 2rem; }
+.quote-ref {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #F1E9D8;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
 /* Framed carousel images - Polaroid style */
 .framed-photo {
     display: block;
