@@ -207,8 +207,10 @@ function showGifts() {
 }
 
 function confirmAttendance() {
-    const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSegHnYfHk-X4eCj1FfVN3MJ5IzeRsDoL3shdrsrKsatAeF2cg/viewform?usp=header";
-    window.open(googleFormUrl, '_blank');
+    const phoneNumber = "18294041711";
+    const message = "Buenas, por medio de este mensaje confirmo mi asistencia a la boda.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // Sistema de Toast
